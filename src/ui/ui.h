@@ -15,9 +15,8 @@ using namespace std;
 using namespace ftxui;
 
 void main_ui(void);
-
-Component init_new_character_window(void);
-Component init_load_character_window(void);
-Component init_dice_roller_window(bool dice_check_states[], int dice_amounts[]);
+Component getCreateCharacterWindow(void);
+Component getLoadCharacterWindow(void);
+Component getDiceRollerWindow(void);
 
 #endif
