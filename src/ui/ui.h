@@ -14,9 +14,4 @@
 using namespace std;
 using namespace ftxui;
 
-void main_ui(void);
-Component getCreateCharacterWindow(void);
-Component getLoadCharacterWindow(void);
-Component getDiceRollerWindow(void);
-
 #endif
