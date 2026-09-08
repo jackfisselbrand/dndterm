@@ -1,5 +1,13 @@
 #include "util.h"
 
+
+/*
+	DISCLAIMER!!!
+	I still need to test the crit success/crit fail functionality.
+*/
+
+
+
 int getDamageRoll(damageInstance roll, string* result) {
 	srand(time(nullptr)); // set rand() seed
 	int roll_total = 0;
@@ -68,23 +76,56 @@ int getD20Roll(d20Roll roll, string* result) {
 	int dice_amount = (roll.advantage != roll.disadvantage) ? 2 : 1;
 
 	if (dice_amount == 1) {
-		roll_total = ((rand() % 20) + 1) + roll.modifier;
+		roll_total = ((rand() % 20) + 1);
+		if (roll_total == 20) {
+			*result += "<CRIT SUCCESS> ";
+			return 200;
+		}
+		else if (roll_total == 1) {
+			*result += "<CRIT FAIL> ";
+			return -200;
+		}
+		roll_total += roll.modifier;
 	}
 
 	else {
-		int roll1 = ((rand() % 20) + 1) + roll.modifier;
-		int roll2 = ((rand() % 20) + 1) + roll.modifier;
+		int roll1 = ((rand() % 20) + 1);
+		int roll2 = ((rand() % 20) + 1);
 		cout<<"roll1: "<<roll1<<endl<<"roll2: "<<roll2<<endl;
 
 		// rolling with advantage
 		if (roll.advantage) {
 			roll_total = (roll1 > roll2) ? roll1 : roll2;
 			*result += "<ADVANTAGE> ";
+
+			if (roll_total == 20) {
+				*result += "<CRIT SUCCESS> ";
+				roll_total = 200;
+			}
+			else if (roll_total == 1) {
+				*result += "<CRIT FAIL> ";
+				roll_total = -200;
+			}
+			else {
+				roll_total += roll.modifier;
+			}
 		}
 		// rolling with disadvantage
 		else {
 			roll_total = (roll1 < roll2) ? roll1 : roll2;
 			*result += "<DISADVANTAGE> ";
+
+			if (roll_total == 20) {
+				*result += "<CRIT SUCCESS> ";
+				roll_total = 200;
+			}
+			else if (roll_total == 1) {
+				*result += "<CRIT FAIL> ";
+				roll_total = -200;
+			}
+			else {
+				roll_total += roll.modifier;
+			}
 		}
 	}
 
