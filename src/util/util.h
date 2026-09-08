@@ -31,6 +31,17 @@ typedef struct damageInstance {
 	vector <damageSource> source_vector;
 } damageInstance;
 
+typedef struct d20Roll {
+	bool advantage = false;
+	bool disadvantage = false;
+	int modifier = 0;
+	string roll_type;
+} d20Roll;
+
+// Calculate a damage roll
 int getDamageRoll(damageInstance roll, string* result);
+
+// Calculate a d20 roll
+int getD20Roll(d20Roll roll, string* result);
 
 #endif

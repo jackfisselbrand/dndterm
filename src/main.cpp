@@ -3,29 +3,15 @@
 using namespace std;
 
 int main(void) {
-	damageSource d1, d2;
+	d20Roll roll;
+	roll.modifier = 5;
+	roll.roll_type += "attack";
 
-	d1.dice_count = 1;
-	d1.dice_type = 8;
-	d1.damage_modifier = 3;
-	d1.damage_interaction = 0.5;
-	d1.damage_type = "slashing";
+	string result = "";
+	int roll_result = getD20Roll(roll, &result);
 
-	d2.dice_count = 2;
-	d2.dice_type = 4;
-	d2.damage_interaction = 2.0;
-	d2.damage_type = "fire";
-
-	vector <damageSource> d = {d1, d2};
-
-	damageInstance dr;
-	dr.critical_hit = true;
-	dr.source_vector = d;
-
-	string result;
-
-	int damage_roll = getDamageRoll(dr, &result);
-	cout<<result<<endl;
+	cout<<"roll_result: "<<roll_result<<endl;
+	cout<<"result: "<<result<<endl;
 
 	return 0;
 }

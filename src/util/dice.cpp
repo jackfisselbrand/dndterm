@@ -57,3 +57,38 @@ int getDamageRoll(damageInstance roll, string* result) {
 	*result += " --> " + to_string(roll_total) + " damage";
 	return roll_total;
 }
+
+
+
+int getD20Roll(d20Roll roll, string* result) {
+	srand(time(nullptr)); // set rand() seed
+	int roll_total = 0;
+	
+	// The eqivalent to xor of advantage and disadvantage. If you have either advantage or disadvantage, you roll 2 dice. Otherwise, you roll one.
+	int dice_amount = (roll.advantage != roll.disadvantage) ? 2 : 1;
+
+	if (dice_amount == 1) {
+		roll_total = ((rand() % 20) + 1) + roll.modifier;
+	}
+
+	else {
+		int roll1 = ((rand() % 20) + 1) + roll.modifier;
+		int roll2 = ((rand() % 20) + 1) + roll.modifier;
+		cout<<"roll1: "<<roll1<<endl<<"roll2: "<<roll2<<endl;
+
+		// rolling with advantage
+		if (roll.advantage) {
+			roll_total = (roll1 > roll2) ? roll1 : roll2;
+			*result += "<ADVANTAGE> ";
+		}
+		// rolling with disadvantage
+		else {
+			roll_total = (roll1 < roll2) ? roll1 : roll2;
+			*result += "<DISADVANTAGE> ";
+		}
+	}
+
+	*result += roll.roll_type + " roll: " + to_string(roll_total);
+	return roll_total;
+
+}
