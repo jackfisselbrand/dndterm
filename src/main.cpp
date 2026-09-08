@@ -25,8 +25,7 @@ int main(void) {
 	string result;
 
 	int damage_roll = getDamageRoll(dr, &result);
-	cout<<"You deal: "<<damage_roll<<" damage!"<<endl;
-	//cout<<result<<endl;
+	cout<<result<<endl;
 
 	return 0;
 }
