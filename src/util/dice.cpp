@@ -91,7 +91,7 @@ int getD20Roll(d20Roll roll, string* result) {
 	else {
 		int roll1 = ((rand() % 20) + 1);
 		int roll2 = ((rand() % 20) + 1);
-		cout<<"roll1: "<<roll1<<endl<<"roll2: "<<roll2<<endl;
+		//cout<<"roll1: "<<roll1<<endl<<"roll2: "<<roll2<<endl;
 
 		// rolling with advantage
 		if (roll.advantage) {
